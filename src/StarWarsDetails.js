@@ -11,7 +11,6 @@ export default function StarWarsDetails() {
     async function load() {
       const charDetails = await getChar(params.id);
       setChar(charDetails);
-      console.log(charDetails);
     }
     load();
   }, [params.id]);
