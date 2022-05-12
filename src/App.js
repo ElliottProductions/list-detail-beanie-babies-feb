@@ -1,8 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import StarWarsDetails from './StarWarsDetails';
-import StarWarsList from './StarWarsList';
+import StarWarsPage from './StarWarsPage';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,7 +15,7 @@ function App() {
       <div className='App'>
         <Switch>
           <Route exact path="/">
-            <StarWarsList/>
+            <StarWarsPage/>
           </Route>
           <Route path="/details/:id">
             <StarWarsDetails/>
