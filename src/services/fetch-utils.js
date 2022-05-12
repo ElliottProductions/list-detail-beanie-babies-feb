@@ -16,5 +16,5 @@ export async function getChar(id) {
     .match({ id })
     .single();
   
-  return response;
+  return response.body;
 }

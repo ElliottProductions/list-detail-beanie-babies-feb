@@ -4,7 +4,7 @@ import './App.css';
 
 export default function StarWarsChar({ char }) {
   return (
-    <Link to={`/chars/${char.id}`}>
+    <Link to={`/details/${char.id}`}>
       <div className="star-card">
         <img src={char.image}/>
         <p>{char.name}</p>
