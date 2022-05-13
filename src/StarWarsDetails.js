@@ -1,36 +1,43 @@
-import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getChar } from './services/fetch-utils';
+import React from 'react';
 
-export default function StarWarsDetails() {
+export default class StarWarsDetails extends React.Component {
 
-  const params = useParams();
-  const [char, setChar] = useState({});
+  constructor() {
+    super();
+    this.state = {
+      char: []
+    };
+  }
 
-  useEffect(() => {
+  async componentDidMount() {
     async function load() {
-      const charDetails = await getChar(params.id);
-      setChar(charDetails);
+      const charDetails = await getChar(this.params.id);
+      this.setState({ char: charDetails });
     }
     load();
-  }, [params.id]);
-  return (
-    <>
-      <Link to="/">Home</Link>
-      <div className="char-details">
-        <h2>{char.name}</h2>
-        <p>from</p>
-        <h5>{char.homeworld}</h5><h5>{char.homeworld__001}</h5>
-        <img src={char.image}/>
-        <p>Gender: {char.gender}</p>
-        <p>Height: {char.height}</p>
-        <p>Mass: {char.mass}</p>
-        <p>{char.productLine && `Product Line: ${char.productLine}`}</p>
-        <p>{char.manufacturer && `Manufacturer: ${char.manufacturer}`}</p>
-        <p>{char.model && `Model: ${char.model}`}</p>
-        <p>{char.class && `Class: ${char.class}`}</p>
+  }
+
+  render() {
+    return (
+      <>
+        <Link to="/">Home</Link>
+        <div className="char-details">
+          <h2>{this.state.char.name}</h2>
+          <p>from</p>
+          <h5>{this.state.char.homeworld}</h5><h5>{this.state.char.homeworld__001}</h5>
+          <img src={this.state.char.image}/>
+          <p>Gender: {this.state.char.gender}</p>
+          <p>Height: {this.state.char.height}</p>
+          <p>Mass: {this.state.char.mass}</p>
+          <p>{this.state.char.productLine && `Product Line: ${this.state.char.productLine}`}</p>
+          <p>{this.state.char.manufacturer && `Manufacturer: ${this.state.char.manufacturer}`}</p>
+          <p>{this.state.char.model && `Model: ${this.state.char.model}`}</p>
+          <p>{this.state.char.class && `Class: ${this.state.char.class}`}</p>
         
-      </div>
-    </>
-  );
+        </div>
+      </>
+    );
+  }
 }
