@@ -3,34 +3,36 @@ import StarWarsList from './StarWarsList';
 import { getStarWars } from './services/fetch-utils';
 import { useState, useEffect } from 'react';
 
-export default function StarWarsPage() {
+export default class StarWarsPage extends React.Component {
 
-  const [starWarsChars, setStarWarsChars] = useState([]);
-  const [page, setPage] = useState(1);
+  constructor() {
+    super();
+    this.state = {
+      starWarsChars: [],
+      page: 1,
+      perPage: 19
+    };
+  }
 
-  const perPage = 19;
   
-  useEffect(() => {
-    async function fetch() {
-      const from = page * perPage - perPage;
-      const to = page * perPage;
-      const chars = await getStarWars(from, to);
-      setStarWarsChars(chars);
 
-    }
-    
+  async componentDidMount() {
+    const from = this.state.page * this.state.perPage - this.state.perPage;
+    const to = this.state.page * this.state.perPage;
+    const chars = await getStarWars(from, to);
+    this.setState({ starWarsChars: chars });
+  }
 
-    fetch();
-  }, [page]);
+  render() {
+    return (
+      <div>
+        <p>Star Wars Characters</p>
+        <button disabled={this.state.page <= 1}
+          onClick={() => this.setState({ page: this.state.page - 1 })}>Prev</button>
+        <button onClick={() => this.setState({ page: this.state.page + 1 })}>Next</button>
 
-  return (
-    <div>
-      <p>Star Wars Characters</p>
-      <button disabled={page <= 1}
-        onClick={() => setPage(page - 1)}>Prev</button>
-      <button onClick={() => setPage(page + 1)}>Next</button>
-
-      <StarWarsList starWarsChars={starWarsChars}/>
-    </div>
-  );
+        <StarWarsList starWarsChars={this.state.starWarsChars}/>
+      </div>
+    );
+  }
 }
