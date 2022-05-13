@@ -1,7 +1,6 @@
 import React from 'react';
 import StarWarsList from './StarWarsList';
 import { getStarWars } from './services/fetch-utils';
-import { useState, useEffect } from 'react';
 
 export default class StarWarsPage extends React.Component {
 

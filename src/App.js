@@ -9,21 +9,23 @@ import {
   Route,
 } from 'react-router-dom';
 
-function App() {
-  return (
-    <Router>
-      <div className='App'>
-        <Switch>
-          <Route exact path="/">
-            <StarWarsPage/>
-          </Route>
-          <Route path="/details/:id">
-            <StarWarsDetails/>
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <div className='App'>
+          <Switch>
+            <Route exact path="/">
+              <StarWarsPage/>
+            </Route>
+            <Route path="/details/:id">
+              <StarWarsDetails/>
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
